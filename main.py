@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+from pages.ai_data_analysis_page import show_ai_ui
+from pages.developer_details_page import show_developer_details
 
 st.set_page_config(page_title="Researcher Profile", layout="wide")
 
@@ -12,15 +14,7 @@ menu = st.sidebar.radio(
 )
 
 if menu == "AI Data Analysis":
-
-
+    show_ai_ui()
 
 elif menu == "Developer":
-    # Add a contact section
-    st.header("Contact Information")
-    email = "jane.doe@example.com"
-    st.write(f"You can reach me at {email}.")
-
-    st.image(
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg",
-        caption="Nature (Pixabay)")
+    show_developer_details()
