@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+from integration.openai_client import OpenAIClient
+
+client = OpenAIClient()
 
 def show_voice_ui():
     st.title("Natural Language to Pandas Query")
@@ -10,10 +13,10 @@ def show_voice_ui():
         type=["csv", "xlsx"]
     )
 
-    user_request = st.text_input("Ask a question about your data ;)")
+    user_request = st.text_input("Ask a question about your data")
 
     if user_request:
-        print("x")
+        query = client.generate_query(system_prompt, prompt)
 
     if uploaded_file is not None:
         if uploaded_file.name.endswith(".csv"):
