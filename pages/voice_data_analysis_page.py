@@ -10,6 +10,11 @@ def show_voice_ui():
         type=["csv", "xlsx"]
     )
 
+    user_request = st.text_input("Ask a question about your data ;)")
+
+    if user_request:
+        print("x")
+
     if uploaded_file is not None:
         if uploaded_file.name.endswith(".csv"):
             df = pd.read_csv(uploaded_file)
@@ -18,3 +23,13 @@ def show_voice_ui():
 
         st.success("Dataset loaded successfully")
         st.dataframe(df)
+
+
+
+# We should extract the dataset's schema so that we can provide our LLM with enough context
+def extract_dataset_schema(df: pd.DataFrame):
+    return {
+        "columns": df.columns.tolist(),
+        "dtypes": df.dtypes.astype(str).to_dict(),
+        "row_count": len(df)
+    }
