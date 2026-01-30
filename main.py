@@ -12,18 +12,7 @@ menu = st.sidebar.radio(
 )
 
 if menu == "AI Data Analysis":
-    st.title("Researcher Profile")
-    st.sidebar.header("Profile Options")
 
-    # Collect basic information
-    name = "Dr. Jane Doe"
-    field = "Astrophysics"
-    institution = "University of Science"
-
-    # Display basic profile information
-    st.write(f"**Name:** {name}")
-    st.write(f"**Field of Research:** {field}")
-    st.write(f"**Institution:** {institution}")
 
 
 elif menu == "Developer":
