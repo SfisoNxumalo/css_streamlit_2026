@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-def show_ai_ui():
+def show_voice_ui():
     st.title("Natural Language to Pandas Query")
     st.sidebar.header("Profile Options")
 
