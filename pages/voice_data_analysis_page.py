@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
-from integration.openai_client import OpenAIClient
+from integration.openai_client import get_openai_client
 
-client = OpenAIClient()
 
 def show_voice_ui():
     st.title("Natural Language to Pandas Query")
@@ -13,10 +12,8 @@ def show_voice_ui():
         type=["csv", "xlsx"]
     )
 
-    user_request = st.text_input("Ask a question about your data")
+    client = get_openai_client()
 
-    if user_request:
-        query = client.generate_query(system_prompt, prompt)
 
     if uploaded_file is not None:
         if uploaded_file.name.endswith(".csv"):
@@ -24,13 +21,44 @@ def show_voice_ui():
         else:
             df = pd.read_excel(uploaded_file)
 
+        st.divider()
+        st.subheader("Ask a question about your data")
+
+        user_request = st.text_input(
+            "Natural language query",
+            placeholder="e.g. Show rows where age > 30"
+        )
+
+
+        if user_request:
+            st.success("Dataset loaded successfully")
+
+            schema = extract_df_schema(df)
+
+            prompt = f"""
+                   Dataset schema:
+                   {schema}
+
+                   User request:
+                   "{user_request}"
+                   """
+
+            with st.spinner("Generating query..."):
+                query_string = client.generate_query(prompt)
+                st.code(query_string)
+
+        st.divider()
+
+
         st.success("Dataset loaded successfully")
         st.dataframe(df)
 
 
 
+
+
 # We should extract the dataset's schema so that we can provide our LLM with enough context
-def extract_dataset_schema(df: pd.DataFrame):
+def extract_df_schema(df: pd.DataFrame):
     return {
         "columns": df.columns.tolist(),
         "dtypes": df.dtypes.astype(str).to_dict(),

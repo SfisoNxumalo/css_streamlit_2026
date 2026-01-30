@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-from config.ai_config import OPENAI_MODEL, SYSTEM_PROMPT
+from integration.config.ai_config import OPENAI_MODEL, SYSTEM_PROMPT
 
 class OpenAIClient:
     def __init__(self):
@@ -18,3 +18,7 @@ class OpenAIClient:
             temperature=0
         )
         return response.choices[0].message.content.strip()
+
+@st.cache_resource
+def get_openai_client() -> OpenAIClient:
+    return OpenAIClient()
