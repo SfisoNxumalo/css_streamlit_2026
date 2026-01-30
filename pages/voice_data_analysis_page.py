@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from integration.openai_client import get_openai_client
-
+from integration.gemini_client import get_gemini_client
 
 def show_voice_ui():
     st.title("Natural Language to Pandas Query")
@@ -29,9 +29,7 @@ def show_voice_ui():
             placeholder="e.g. Show rows where age > 30"
         )
 
-
         if user_request:
-            st.success("Dataset loaded successfully")
 
             schema = extract_df_schema(df)
 
@@ -48,7 +46,6 @@ def show_voice_ui():
                 st.code(query_string)
 
         st.divider()
-
 
         st.success("Dataset loaded successfully")
         st.dataframe(df)

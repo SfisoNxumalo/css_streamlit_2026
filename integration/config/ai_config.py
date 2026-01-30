@@ -1,4 +1,5 @@
 OPENAI_MODEL = "gpt-4.1-mini"
+GEMINI_MODEL = "models/gemini-1.5-flash"
 
 SYSTEM_PROMPT = """
 You convert natural language requests into a valid pandas DataFrame.query() string.
