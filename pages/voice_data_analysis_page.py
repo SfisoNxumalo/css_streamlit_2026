@@ -12,7 +12,7 @@ def show_voice_ui():
         type=["csv", "xlsx"]
     )
 
-    client = get_openai_client()
+    client = get_gemini_client()
 
 
     if uploaded_file is not None:
@@ -43,16 +43,24 @@ def show_voice_ui():
 
             with st.spinner("Generating query..."):
                 query_string = client.generate_query(prompt)
-                st.code(query_string)
+
+                if query_string == "INVALID_QUERY":
+                    st.error("Could not generate a valid query.")
+                else:
+                    st.info(f"Generated Query: `.query('{query_string}')`")
+
+                    st.code(query_string)
+                    try:
+                        filtered_df = df.query(query_string)
+                        st.success(f"Found {len(filtered_df)} results!")
+                        st.dataframe(filtered_df)
+                    except Exception as e:
+                        st.error(f"Error applying query: {e}")
 
         st.divider()
 
         st.success("Dataset loaded successfully")
         st.dataframe(df)
-
-
-
-
 
 # We should extract the dataset's schema so that we can provide our LLM with enough context
 def extract_df_schema(df: pd.DataFrame):

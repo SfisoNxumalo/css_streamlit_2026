@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-from config.ai_config import GEMINI_MODEL, SYSTEM_PROMPT
+from integration.config.ai_config import GEMINI_MODEL, SYSTEM_PROMPT
 
 
 class GeminiClient:
@@ -15,7 +15,6 @@ class GeminiClient:
         User request:
         {user_prompt}
         """
-
         response = self.model.generate_content(
             prompt,
             generation_config={
