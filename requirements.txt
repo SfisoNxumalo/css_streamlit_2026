@@ -1,0 +1,10 @@
+streamlit
+pandas
+protobuf
+numpy
+SpeechRecognition
+openai
+google-generativeai
+pyaudio
+openpyxl
+pydub
