@@ -1,19 +1,91 @@
 import streamlit as st
 import pandas as pd
-from integration.openai_client import get_openai_client
-from integration.gemini_client import get_gemini_client
+import time
+
+from integration.ai.gemini_client import get_gemini_client
+from integration.speech_recognition.speech_recognition import voice
+
+
+# I extract the dataset's schema (column names) so that we can provide
+# our LLM with context of available columns and their data types
+def extract_df_schema(df: pd.DataFrame):
+    return {
+        "columns": df.columns.tolist(),
+        "dtypes": df.dtypes.astype(str).to_dict(),
+        "row_count": len(df)
+    }
+
+def process_user_request(df: pd.DataFrame, schema: dict, user_request: str, audio_value):
+    print("Processing...")
+    if user_request and audio_value:
+        callouts("info", "Text message received. Audio was ignored", 3)
+
+    if audio_value and not user_request:
+        with st.spinner("Transcribing..."):
+            vr = voice()
+            transcription = vr.transcribe(audio_value)
+
+            if transcription and not transcription.startswith("Error:"):
+                user_request = transcription
+                print("Transcribed: ", transcription)
+            else:
+                callouts("error", "No transcription detected", 3)
+
+    if user_request:
+        with st.spinner("Thinking..."):
+            client = get_gemini_client()
+            prompt = f"""
+               Dataset schema:
+               {schema}
+        
+               User request:
+               "{user_request}"
+               """
+
+            query_string = client.generate_query(prompt)
+            print("Query: ", query_string)
+            print(query_string)
+            if query_string == "INVALID_QUERY":
+                callouts("error", "Could not generate a valid query.", 4)
+            else:
+                col1, col2 = st.columns([1, 3], vertical_alignment="center")
+                col1.info(f"Generated Query: ")
+                col2.code(f"df.query('{query_string}')")
+                try:
+                    filtered_df = df.query(query_string)
+                    callouts("success", f"Found {len(filtered_df)} results!", 5)
+                    st.dataframe(filtered_df)
+                except Exception as e:
+                    st.error(f"Error applying query: {e}")
+
+
+# Responsible for displaying feedback to user
+def callouts(callout_type: str, message: str, seconds:float = 3):
+    placeholder = st.empty()
+
+    if callout_type == "error":
+        placeholder.error(message)
+    elif callout_type == "warning":
+        placeholder.warning(message)
+    elif callout_type == "success":
+        placeholder.success(message)
+    elif callout_type == "info":
+        placeholder.info(message)
+
+    time.sleep(seconds)
+    placeholder.empty()
+
 
 def show_voice_ui():
+
     st.title("Natural Language to Pandas Query")
     st.sidebar.header("Profile Options")
 
-    uploaded_file = st.file_uploader(
-        "Upload your dataset (CSV or Excel)",
-        type=["csv", "xlsx"]
-    )
-
-    client = get_gemini_client()
-
+    with st.expander("Upload your dataset"):
+        uploaded_file = st.file_uploader(
+            "Upload your dataset (CSV or Excel)",
+            type=["csv", "xlsx"]
+        )
 
     if uploaded_file is not None:
         if uploaded_file.name.endswith(".csv"):
@@ -21,51 +93,32 @@ def show_voice_ui():
         else:
             df = pd.read_excel(uploaded_file)
 
-        st.divider()
+        #Convert data in columns of type object to lowercase
+        object_cols = df.select_dtypes(include="object").columns
+        df[object_cols] = df[object_cols].apply(lambda col: col.str.lower())
+
+        callouts("success", "Dataset loaded successfully", 5)
+
+        schema = extract_df_schema(df)
+
         st.subheader("Ask a question about your data")
 
-        user_request = st.text_input(
-            "Natural language query",
-            placeholder="e.g. Show rows where age > 30"
-        )
+        with st.form("my_form", clear_on_submit=True):
 
-        if user_request:
+            user_request = st.text_input(
+                "Natural language query",
+                placeholder="e.g. Show rows where age > 30",
+                key="message",
+                max_chars=30
+            )
 
-            schema = extract_df_schema(df)
+            audio_value = st.audio_input("Record high quality audio",
+                                         key="audio")
 
-            prompt = f"""
-                   Dataset schema:
-                   {schema}
+            submitted = st.form_submit_button("Process", icon="🤖", width="stretch")
 
-                   User request:
-                   "{user_request}"
-                   """
-
-            with st.spinner("Generating query..."):
-                query_string = client.generate_query(prompt)
-
-                if query_string == "INVALID_QUERY":
-                    st.error("Could not generate a valid query.")
-                else:
-                    st.info(f"Generated Query: `.query('{query_string}')`")
-
-                    st.code(query_string)
-                    try:
-                        filtered_df = df.query(query_string)
-                        st.success(f"Found {len(filtered_df)} results!")
-                        st.dataframe(filtered_df)
-                    except Exception as e:
-                        st.error(f"Error applying query: {e}")
+            if submitted and (user_request or audio_value):
+                process_user_request(df, schema, user_request, audio_value)
 
         st.divider()
-
-        st.success("Dataset loaded successfully")
         st.dataframe(df)
-
-# We should extract the dataset's schema so that we can provide our LLM with enough context
-def extract_df_schema(df: pd.DataFrame):
-    return {
-        "columns": df.columns.tolist(),
-        "dtypes": df.dtypes.astype(str).to_dict(),
-        "row_count": len(df)
-    }

@@ -11,6 +11,12 @@ Rules:
 - Do NOT include df.query()
 - Do NOT explain anything
 - No function calls
-- No backticks
-- If the query cannot be created, return INVALID_QUERY
+- Do not surround the returned query with backticks.
+
+Example:
+User: Please find users that are older than 5.
+Response: users > 5
+
+
+- If the query cannot be created or the user's query does not have a valid column name, return INVALID_QUERY
 """.strip()

@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-from integration.config.ai_config import OPENAI_MODEL, SYSTEM_PROMPT
+from integration.ai.config.ai_config import OPENAI_MODEL, SYSTEM_PROMPT
 
 class OpenAIClient:
     def __init__(self):

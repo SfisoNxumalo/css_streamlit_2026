@@ -1,7 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-from integration.config.ai_config import GEMINI_MODEL, SYSTEM_PROMPT
-
+from integration.ai.config.ai_config import GEMINI_MODEL, SYSTEM_PROMPT
 
 class GeminiClient:
     def __init__(self):
