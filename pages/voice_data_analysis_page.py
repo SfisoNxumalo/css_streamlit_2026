@@ -124,6 +124,7 @@ def show_voice_ui():
 
             st.divider()
             st.dataframe(df)
+
     except ResourceExhausted:
         callouts("warning", "AI is busy. Please try again shortly.", 4)
     except InternalServerError:
