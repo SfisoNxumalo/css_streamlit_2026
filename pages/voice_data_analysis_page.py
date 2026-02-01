@@ -3,7 +3,7 @@ import pandas as pd
 import time
 
 from integration.ai.gemini_client import get_gemini_client
-from integration.speech_recognition.speech_recognition import voice
+from integration.speech_recognition.speech_recognition import SpeechRecognition
 
 
 # I extract the dataset's schema (column names) so that we can provide
@@ -22,7 +22,7 @@ def process_user_request(df: pd.DataFrame, schema: dict, user_request: str, audi
 
     if audio_value and not user_request:
         with st.spinner("Transcribing..."):
-            vr = voice()
+            vr = SpeechRecognition()
             transcription = vr.transcribe(audio_value)
 
             if transcription and not transcription.startswith("Error:"):

@@ -1,6 +1,6 @@
 import speech_recognition as sr
 
-class voice:
+class SpeechRecognition:
 
     def __init__(self):
         self.recognizer = sr.Recognizer()
@@ -10,17 +10,13 @@ class voice:
         while True:
             try:
                 with sr.AudioFile(audio) as source:
-                    #audio = self.recognizer.listen(source)
-                    #command = self.recognizer.recognize_google(audio).lower()
                     audio_data = self.recognizer.record(source)
 
                     command = self.recognizer.recognize_google(audio_data).lower()
                     return command
-                    # if command == 'exit':
-                    #     print('Exiting...')
-                print(command)
+
             except sr.UnknownValueError:
                 print("error")
-                return "Error: Speech service down"
+                return "Error: voice not detected in the audio"
             except sr.RequestError:
                 return "Error: Speech service down"
