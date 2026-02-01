@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from pages.voice_data_analysis_page import show_voice_ui
+from pages.analysis_page import analysis_ui
 from pages.developer_details_page import show_developer_details
 
 st.set_page_config(page_title="Researcher Profile", layout="wide")
@@ -14,7 +14,7 @@ menu = st.sidebar.radio(
 )
 
 if menu == "Voice Data Analysis":
-    show_voice_ui()
+    analysis_ui()
 
 elif menu == "Developer":
     show_developer_details()

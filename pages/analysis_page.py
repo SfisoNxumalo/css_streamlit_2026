@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import time
-import json
 
 from google.api_core.exceptions import ResourceExhausted, InternalServerError
 
@@ -75,15 +74,14 @@ def callouts(callout_type: str, message: str, seconds:float = 3):
     time.sleep(seconds)
     placeholder.empty()
 
-
-def show_voice_ui():
+def analysis_ui():
 
     try:
 
         st.title("Natural Language to Pandas Query")
         st.sidebar.header("Profile Options")
 
-        with st.expander("Upload your dataset"):
+        with st.expander("Upload your dataset", expanded=True):
             uploaded_file = st.file_uploader(
                 "Upload your dataset (CSV or Excel)",
                 type=["csv", "xlsx"]
@@ -109,12 +107,12 @@ def show_voice_ui():
 
                 user_request = st.text_input(
                     "Natural language query",
-                    placeholder="e.g. Show rows where age > 30",
+                    placeholder="e.g. Show rows where age is more than 30",
                     key="message",
                     max_chars=200
                 )
 
-                audio_value = st.audio_input("Record high quality audio",
+                audio_value = st.audio_input("Record high quality audio (e.g. Show me users who are 30 years old)",
                                              key="audio")
 
                 submitted = st.form_submit_button("Process", icon="🤖", width="stretch")
