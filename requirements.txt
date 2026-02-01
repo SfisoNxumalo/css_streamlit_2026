@@ -8,3 +8,4 @@ google-generativeai
 pyaudio
 openpyxl
 pydub
+google-api-core
