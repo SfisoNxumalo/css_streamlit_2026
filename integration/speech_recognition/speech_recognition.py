@@ -17,6 +17,6 @@ class SpeechRecognition:
 
             except sr.UnknownValueError:
                 print("error")
-                return "Error: voice not detected in the audio"
+                return "Error: No audio detected"
             except sr.RequestError:
                 return "Error: Speech service down"
