@@ -65,7 +65,7 @@ def show_developer_details():
     st.markdown("### Quick Overview")
     m1, m2, m3 = st.columns(3)
 
-    m1.metric("Experience", "1+ years")
+    m1.metric("Experience", "1+ Years")
     m2.metric("Cloud Platforms", "Azure")
     m3.metric("Certifications", "4 Microsoft")
 
