@@ -82,6 +82,22 @@ def analysis_ui():
         st.sidebar.header("Profile Options")
 
         with st.expander("Upload your dataset", expanded=True):
+            st.markdown(
+                """
+            ##### About this project
+            This project uses an LLM to convert a user’s natural language into a Pandas `query` for filtering a provided dataset.
+
+            **A few things to note:**
+            - The LLM is not perfect, so occasional errors are expected (Hopefully you experience none😅).
+            - For best results, upload a **cleaned dataset** (you can use the *Top Apps dataset* from Day 2).
+            - The LLM does not directly inspect the data itself. Instead, it is provided with the dataset’s **schema** (column names and data types) to better understand what queries are valid.
+
+            If you discover a cool or improved way to enhance any functionality, feel free to reach out!  
+            Alternatively, you’re welcome to submit a PR on  
+            👉 [GitHub Repository](https://github.com/SfisoNxumalo/css_streamlit_2026)
+            """
+            )
+
             uploaded_file = st.file_uploader(
                 "Upload your dataset (CSV or Excel)",
                 type=["csv", "xlsx"]
