@@ -53,7 +53,7 @@ def show_developer_details():
             <p>
             Hi, I’m Sifiso. I enjoy building secure full-stack applications. I consider myself tech-agnostic; however, my current tech stack includes C#, .NET, React, and SQL Server. I’m currently exploring the nitty-gritty of the data science world. 
             </p>
-            <p>📍 Johannesburg, South Africa</p>
+            <p>Johannesburg, South Africa</p>
             <p>
                 <a href="https://www.linkedin.com/in/sifiso-mawila-1b888a224/" style="color:#7dd3fc;">LinkedIn</a> |
                 <a href="https://github.com/SfisoNxumalo" style="color:#7dd3fc;">GitHub</a>
@@ -71,7 +71,7 @@ def show_developer_details():
     # m4.metric("Achievements", "SATNAC 2025 Winner")
 
     # ------------------ TABS ------------------
-    tabs = st.tabs(["🎓 Education", "🧠 Skills", "🏆 Achievements"])
+    tabs = st.tabs(["🎓 Education", "Skills", "🏆 Achievements"])
 
     with tabs[0]:
         st.markdown("""
@@ -106,6 +106,9 @@ def show_developer_details():
             </p>
             <p><b>Databases:</b>
             SQL Server, MySQL, MongoDB, Firebase, Snowflake
+            </p>
+            <p><b>Data Science/AI tools:</b>
+            Pandas, Scikit-learn, Numpy, Azure AI Foundry, Google AI studio
             </p>
             <p><b>Architecture:</b>
             Onion Architecture, Microservices, MVC
