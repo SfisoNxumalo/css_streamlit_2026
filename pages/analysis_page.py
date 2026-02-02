@@ -89,9 +89,9 @@ def analysis_ui():
 
             **A few things to note:**
             - The LLM is not perfect, so occasional errors are expected (Hopefully you experience none😅).
-            - For best results, upload a **cleaned dataset** (you can use the *Top Apps dataset* from Day ).
+            - For best results, upload a **cleaned dataset** (you can use the *Top Apps dataset* from Day 4).
             - The LLM does not directly inspect the data itself. Instead, it is provided with the dataset’s **schema** (column names and data types) to better understand what queries are valid.
-            - You can either type or use the Speech-to-text feature to send your query
+            - You can either type or use the Speech-to-text feature to send your query.
 
             If you discover a cool or improved way to enhance any functionality, feel free to reach out!  
             Alternatively, you’re welcome to submit a PR on  
