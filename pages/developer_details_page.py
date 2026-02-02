@@ -68,7 +68,6 @@ def show_developer_details():
     m1.metric("Experience", "1+ years")
     m2.metric("Cloud Platforms", "Azure")
     m3.metric("Certifications", "4 Microsoft")
-    # m4.metric("Achievements", "SATNAC 2025 Winner")
 
     # ------------------ TABS ------------------
     tabs = st.tabs(["🎓 Education", "Skills", "🏆 Achievements"])
