@@ -51,10 +51,9 @@ def show_developer_details():
             <h1>Sifiso Mawila</h1>
             <h3>Junior Software Developer</h3>
             <p>
-            I enjoy building secure fullstack application using 
-            <b>C#, .NET, React, SQL Server.</b> Currently learning the nitty-gritty of the Data Science world!
+            Hi, I’m Sifiso. I enjoy building secure full-stack applications. I consider myself tech-agnostic; however, my current tech stack includes C#, .NET, React, and SQL Server. I’m currently exploring the nitty-gritty of the data science world. 
             </p>
-            <p>📍 Johannesburg, South Africa</p>
+            <p>Johannesburg, South Africa</p>
             <p>
                 <a href="https://www.linkedin.com/in/sifiso-mawila-1b888a224/" style="color:#7dd3fc;">LinkedIn</a> |
                 <a href="https://github.com/SfisoNxumalo" style="color:#7dd3fc;">GitHub</a>
@@ -72,7 +71,7 @@ def show_developer_details():
     # m4.metric("Achievements", "SATNAC 2025 Winner")
 
     # ------------------ TABS ------------------
-    tabs = st.tabs(["🎓 Education", "🧠 Skills", "🏆 Achievements"])
+    tabs = st.tabs(["🎓 Education", "Skills", "🏆 Achievements"])
 
     with tabs[0]:
         st.markdown("""
@@ -85,8 +84,8 @@ def show_developer_details():
                 Software Engineering, Database Management, AI, Data Science, 
                 Computational Mathematics, Capstone Project, Research Methods
                 </p>
-                <li><b>Advanced Diploma in Information Technology | 2024</b> – <i>Graduated with Distinction (81%)</i><br/>Cape Peninsula University of Technology | 2024</li>
-                <li><b>Diploma in Systems Development | 2022</b><br/>Boston City Campus | 2022</li>
+                <li><b>Advanced Diploma in Information Technology | 2024</b> – <i>Graduated with Distinction</i><br/>Cape Peninsula University of Technology | 2024</li>
+                <li><b>Diploma in Systems Development | 2022</b><br/>Boston City Campus</li>
             </ul>
 
             
@@ -97,7 +96,7 @@ def show_developer_details():
     with tabs[1]:
         st.markdown("""
         <div class='section-card'>
-            <h3>🧠 Technical Skills</h3>
+            <h3>Technical Skills</h3>
             <p><b>Programming Languages:</b> C#, Java, JavaScript, TypeScript, Python, SQL</p>
             <p><b>Frameworks:</b>
             ASP.NET Core, EF Core, React, Angular, Express.js, Flutter
@@ -107,6 +106,9 @@ def show_developer_details():
             </p>
             <p><b>Databases:</b>
             SQL Server, MySQL, MongoDB, Firebase, Snowflake
+            </p>
+            <p><b>Data Science/AI tools:</b>
+            Pandas, Scikit-learn, Numpy, Azure AI Foundry, Google AI studio
             </p>
             <p><b>Architecture:</b>
             Onion Architecture, Microservices, MVC
