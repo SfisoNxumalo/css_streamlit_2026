@@ -10,10 +10,10 @@ st.set_page_config(page_title="Researcher Profile", layout="wide")
 st.sidebar.title("Menu")
 menu = st.sidebar.radio(
     "Go to:",
-    ["Voice Data Analysis", "Developer"],
+    ["Data Analysis", "Developer"],
 )
 
-if menu == "Voice Data Analysis":
+if menu == "Data Analysis":
     analysis_ui()
 
 elif menu == "Developer":
