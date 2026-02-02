@@ -65,10 +65,9 @@ def show_developer_details():
     st.markdown("### Quick Overview")
     m1, m2, m3 = st.columns(3)
 
-    m1.metric("Experience", "1+")
+    m1.metric("Experience", "1+ years")
     m2.metric("Cloud Platforms", "Azure")
     m3.metric("Certifications", "4 Microsoft")
-    # m4.metric("Achievements", "SATNAC 2025 Winner")
 
     # ------------------ TABS ------------------
     tabs = st.tabs(["🎓 Education", "Skills", "🏆 Achievements"])

@@ -104,41 +104,42 @@ def analysis_ui():
                 type=["csv", "xlsx"]
             )
 
-        if uploaded_file is not None:
-            if uploaded_file.name.endswith(".csv"):
-                df = pd.read_csv(uploaded_file)
-            else:
-                df = pd.read_excel(uploaded_file)
+        with st.spinner("Loading your dataset..."):
+            if uploaded_file is not None:
+                if uploaded_file.name.endswith(".csv"):
+                    df = pd.read_csv(uploaded_file)
+                else:
+                    df = pd.read_excel(uploaded_file)
 
-            #Convert data in columns of type object to lowercase
-            object_cols = df.select_dtypes(include="object").columns
-            df[object_cols] = df[object_cols].apply(lambda col: col.str.lower())
+                #Convert data in columns of type object to lowercase
+                object_cols = df.select_dtypes(include="object").columns
+                df[object_cols] = df[object_cols].apply(lambda col: col.str.lower())
 
-            callouts("success", "Dataset loaded successfully", 5)
+                callouts("success", "Dataset loaded successfully", 5)
 
-            schema = extract_df_schema(df)
+                schema = extract_df_schema(df)
 
-            st.subheader("Ask a question about your data")
+                st.subheader("Ask a question about your data")
 
-            with st.form("my_form", clear_on_submit=True):
+                with st.form("my_form", clear_on_submit=True):
 
-                user_request = st.text_input(
-                    "Natural language query",
-                    placeholder="e.g. Show rows where age is more than 30",
-                    key="message",
-                    max_chars=200
-                )
+                    user_request = st.text_input(
+                        "Natural language query",
+                        placeholder="e.g. Show rows where age is more than 30",
+                        key="message",
+                        max_chars=200
+                    )
 
-                audio_value = st.audio_input("Record high quality audio (e.g. Show me users who are 30 years old)",
-                                             key="audio")
+                    audio_value = st.audio_input("Record high quality audio (e.g. Show me users who are 30 years old)",
+                                                 key="audio")
 
-                submitted = st.form_submit_button("Process", icon="🤖", width="stretch")
+                    submitted = st.form_submit_button("Process", icon="🤖", width="stretch")
 
-                if submitted and (user_request or audio_value):
-                    process_user_request(df, schema, user_request, audio_value)
+                    if submitted and (user_request or audio_value):
+                        process_user_request(df, schema, user_request, audio_value)
 
-            st.divider()
-            st.dataframe(df)
+                st.divider()
+                st.dataframe(df)
 
     except ResourceExhausted:
         callouts("warning", "AI is busy. Please try again shortly.", 4)
