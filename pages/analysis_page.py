@@ -85,7 +85,7 @@ def analysis_ui():
             st.markdown(
                 """
             ##### About this project
-            This project uses an LLM to convert a user’s natural language into a Pandas `query` for filtering a provided dataset. Just Upload a csv/excel file and ask away!
+            This project uses an LLM to convert a user’s natural language into a Pandas `query` for filtering a provided dataset. Just upload a csv/excel file and ask away!
 
             **A few things to note:**
             - The LLM is not perfect, so occasional errors are expected (Hopefully you experience none😅).
