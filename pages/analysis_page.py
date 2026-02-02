@@ -85,11 +85,11 @@ def analysis_ui():
             st.markdown(
                 """
             ##### About this project
-            This project uses an LLM to convert a user’s natural language into a Pandas `query` for filtering a provided dataset. Just Upload a csv/excel file and ask away!
+            This project uses an LLM to convert a user’s natural language into a Pandas `query` for filtering a provided dataset. Just upload a csv/excel file and ask away!
 
             **A few things to note:**
             - The LLM is not perfect, so occasional errors are expected (Hopefully you experience none😅).
-            - For best results, upload a **cleaned dataset** (you can use the *Top Apps dataset* from Day 2).
+            - For best results, upload a **cleaned dataset** (you can use the *Top Apps dataset* from Day ).
             - The LLM does not directly inspect the data itself. Instead, it is provided with the dataset’s **schema** (column names and data types) to better understand what queries are valid.
             - You can either type or use the Speech-to-text feature to send your query
 

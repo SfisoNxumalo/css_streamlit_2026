@@ -78,13 +78,13 @@ def show_developer_details():
         <div class="section-card">
             <h3>Education</h3>
             <ul>
-                <li><b>Postgraduate Diploma in Information Technology | 2025</b><br/>Cape Peninsula University of Technology | 2025</li>
+                <li><b>Postgraduate Diploma in Information Technology | 2025</b><br/>Cape Peninsula University of Technology</li>
                 <b>Relevant Coursework</b>
                 <p>
                 Software Engineering, Database Management, AI, Data Science, 
                 Computational Mathematics, Capstone Project, Research Methods
                 </p>
-                <li><b>Advanced Diploma in Information Technology | 2024</b> – <i>Graduated with Distinction</i><br/>Cape Peninsula University of Technology | 2024</li>
+                <li><b>Advanced Diploma in Information Technology | 2024</b> – <i>Graduated with Distinction</i><br/>Cape Peninsula University of Technology</li>
                 <li><b>Diploma in Systems Development | 2022</b><br/>Boston City Campus</li>
             </ul>
 
