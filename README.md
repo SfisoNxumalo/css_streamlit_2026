@@ -28,9 +28,6 @@ project/
 │── .streamlit/
 │    └── secrets.toml
 ```
-## Contribute
-Found a way to improve the app? Open an issue or submit a PR on GitHub:  
-[View on GitHub](https://github.com/your-username/your-repo) 🚀  
 
 ## Dependencies
 - Python 3.9+  
@@ -42,11 +39,11 @@ Found a way to improve the app? Open an issue or submit a PR on GitHub:
 ## How to run
 
 1. Install Libraries:
-`pip install -r requirements.txt`
+```pip install -r requirements.txt```
 
 2. Create a file and add your API key:
 File: .streamlit/secrets.toml
-`GEMINI_API_KEY = "your_key_here"`
+```GEMINI_API_KEY = "your_key_here"```
 
 3. Run app:
-`streamlit run app.py`
+```streamlit run app.py```
